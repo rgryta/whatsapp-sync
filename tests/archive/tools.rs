@@ -351,8 +351,8 @@ db_test!(status_reports_the_corpus_and_the_window, |f| {
         "sync: last run 2026-08-01T12:01+00:00\n\
          2 chats, 3 messages, oldest watermark 2026-08-01T11:58+00:00, \
          0 transcript(s) pending\n\
-         0 message(s) edited, 0 deleted; edits and deletions are detected only within \
-         the sweep window, so anything older than that is unknown rather than unchanged"
+         0 message(s) edited, 0 deleted; edits and deletions are recorded as they arrive, \
+         so any made before this client started archiving are unknown rather than absent"
     );
 });
 

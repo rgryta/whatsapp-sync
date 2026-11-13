@@ -234,13 +234,13 @@ pub fn render_status(rows: &[StatusRow]) -> String {
         first.messages,
         when(first.oldest_watermark),
     ));
-    // Say the window out loud. Without it a reader has no way to know that "no edits"
-    // means "none in the last few days" rather than "none ever", and would state the
+    // Say the limit out loud. Without it a reader has no way to know that "no edits"
+    // means "none since the client started" rather than "none ever", and would state the
     // stronger claim.
     lines.push(format!(
-        "{} message(s) edited, {} deleted; edits and deletions are detected only \
-         within the sweep window, so anything older than that is unknown rather than \
-         unchanged",
+        "{} message(s) edited, {} deleted; edits and deletions are recorded as they \
+         arrive, so any made before this client started archiving are unknown rather \
+         than absent",
         first.edited, first.deleted,
     ));
     lines.join("\n")
@@ -679,14 +679,14 @@ mod tests {
     }
 
     #[test]
-    fn status_says_the_edit_window_out_loud() {
+    fn status_says_the_edit_limit_out_loud() {
         let text = render_status(&[StatusRow {
             edited: 3,
             deleted: 2,
             ..status_row()
         }]);
         assert!(text.contains("3 message(s) edited, 2 deleted"), "{text}");
-        assert!(text.contains("within the sweep window"), "{text}");
+        assert!(text.contains("recorded as they arrive"), "{text}");
     }
 
     fn revision(seq: i32, body: &str) -> Revision {
