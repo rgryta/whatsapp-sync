@@ -1,0 +1,82 @@
+# One workspace, two binaries: `whatsapp-client` (the WhatsApp linked device and ingester,
+# AGPL) and `whatsapp-mcp` (the read surface, MIT, in this root package). The root package
+# never depends on `whatsapp-client`, so the process that serves the archive cannot reach
+# WhatsApp: the code is not in it. `tests/archive/isolation.rs` keeps the manifests honest.
+[workspace]
+members = ["crates/client", "crates/core", "crates/mcp"]
+resolver = "3"
+
+[workspace.package]
+# The release version: bumping it on main tags it and publishes the image (tag.yml).
+version = "0.3.0"
+edition = "2024"
+# The toolchain the image builds with, which is always the latest stable. Cargo resolves
+# dependencies to what this claims, so an older number holds back releases (it held back the
+# ctutils and time security fixes at 1.85) and promises support for compilers nothing tests.
+rust-version = "1.100"
+license = "MIT"
+publish = false
+
+[workspace.dependencies]
+whatsapp-core = { path = "crates/core" }
+whatsapp-mcp = { path = "crates/mcp" }
+chrono = { version = "0.4.45", default-features = false, features = ["std", "serde", "clock"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+sqlx = { version = "0.9.0", default-features = false, features = [
+    "runtime-tokio",
+    "tls-rustls-ring",
+    "postgres",
+    "chrono",
+    "json",
+    "macros",
+] }
+thiserror = "2.0.21"
+tokio = { version = "1.54.1", features = ["macros", "rt-multi-thread", "net", "io-util", "signal"] }
+tracing = "0.1.44"
+
+[package]
+name = "whatsapp-sync"
+description = "Read-only MCP server over the WhatsApp archive"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "whatsapp-mcp"
+path = "src/bin/whatsapp-mcp.rs"
+
+[dependencies]
+whatsapp-core.workspace = true
+whatsapp-mcp.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+
+[dev-dependencies]
+axum = "0.8.9"
+chrono.workspace = true
+serde_json.workspace = true
+sqlx.workspace = true
+# The Rust mirror of `tests/conftest.py`: a postgres:18-alpine whose DSN the container
+# builds itself, so no test can be pointed at a real database.
+testcontainers-modules = { version = "0.15.0", features = ["postgres"] }
+# `reusable-containers` is what lets one named container serve every run. Rust never
+# drops a `static`, so a container parked in one would otherwise be left behind with
+# nothing to reap it; reuse makes that explicit and bounded to a single container.
+testcontainers = { version = "0.27.3", features = ["reusable-containers"] }
+
+[[test]]
+name = "archive"
+path = "tests/archive/main.rs"
+
+[profile.release]
+# This port exists to cut resident memory, and these are the two knobs that move it:
+# one codegen unit lets the linker drop more, and aborting on panic removes the
+# unwinding tables.
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

@@ -1,0 +1,491 @@
+{
+ "meId": "48000000000:3@s.whatsapp.net",
+ "meLid": "222222222222222:3@lid",
+ "acks": [
+  {
+   "name": "pn contact device",
+   "error": null,
+   "input": "APgMEwb3AAL/hkgRERERHwj7AaEa/wUXAAAAAAQ4GPwDQm9i+AH4Bh1RRQRN/AMBAgM=",
+   "output": "APgLGwj7AaER9wAC/4ZIERERER8VEwQ4BvcAA/+GSAAAAAAP"
+  },
+  {
+   "name": "pn contact device",
+   "error": 500,
+   "input": "APgMEwb3AAL/hkgRERERHwj7AaEa/wUXAAAAAAQ4GPwDQm9i+AH4Bh1RRQRN/AMBAgM=",
+   "output": "APgNGwj7AaER9wAC/4ZIERERER8VE6jspAQ4BvcAA/+GSAAAAAAP"
+  },
+  {
+   "name": "pn contact, explicit device 0",
+   "error": null,
+   "input": "APgKEwb3AAD/hkgRERERHwj7AaAa/wUWmZmZmQQ4+AH4Bh1RRQRN/AMBAgM=",
+   "output": "APgLGwj7AaAR+v+GSBEREREfAxUTBDgG9wAD/4ZIAAAAAA8="
+  },
+  {
+   "name": "pn contact, explicit device 0",
+   "error": 500,
+   "input": "APgKEwb3AAD/hkgRERERHwj7AaAa/wUWmZmZmQQ4+AH4Bh1RRQRN/AMBAgM=",
+   "output": "APgNGwj7AaAR+v+GSBEREREfAxUTqOykBDgG9wAD/4ZIAAAAAA8="
+  },
+  {
+   "name": "lid contact",
+   "error": null,
+   "input": "APgKEwb6/4gREiIzNERVX3YI+wGiGv8FFwAAAAEEOPgB+AYdUUUETfwDAQID",
+   "output": "APgLGwj7AaIR+v+IERIiMzREVV92FRMEOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "lid contact",
+   "error": 500,
+   "input": "APgKEwb6/4gREiIzNERVX3YI+wGiGv8FFwAAAAEEOPgB+AYdUUUETfwDAQID",
+   "output": "APgNGwj7AaIR+v+IERIiMzREVV92FROo7KQEOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "group from lid member",
+   "error": null,
+   "input": "APgOEwb6/wkSA2MAAAAAAAEcBfcBBP+IERIiMzREVV8I+wGjGv8FFwAAAAIEOPwPYWRkcmVzc2luZ19tb2RldvgB+AYdUUUETfwDAQID",
+   "output": "APgNGwj7AaMR+v8JEgNjAAAAAAABHBUTBfcBBP+IERIiMzREVV8EOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "group from lid member",
+   "error": 500,
+   "input": "APgOEwb6/wkSA2MAAAAAAAEcBfcBBP+IERIiMzREVV8I+wGjGv8FFwAAAAIEOPwPYWRkcmVzc2luZ19tb2RldvgB+AYdUUUETfwDAQID",
+   "output": "APgPGwj7AaMR+v8JEgNjAAAAAAABHBUTqOykBfcBBP+IERIiMzREVV8EOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "own phone to pn chat",
+   "error": null,
+   "input": "APgMEwb6/4ZIAAAAAA8DlPr/hkgRERERHwMI+wGkGv8FFwAAAAMEOPgB+AYdUUUETfwDAQID",
+   "output": "APgNGwj7AaQR+v+GSAAAAAAPAxUTlPr/hkgRERERHwMEOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "own phone to pn chat",
+   "error": 500,
+   "input": "APgMEwb6/4ZIAAAAAA8DlPr/hkgRERERHwMI+wGkGv8FFwAAAAMEOPgB+AYdUUUETfwDAQID",
+   "output": "APgPGwj7AaQR+v+GSAAAAAAPAxUTqOyklPr/hkgRERERHwMEOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "own phone to lid chat",
+   "error": null,
+   "input": "APgMEwb6/4giIiIiIiIiL3aU+v+IERIiMzREVV92CPsBpRr/BRcAAAAEBDj4AfgGHVFFBE38AwECAw==",
+   "output": "APgNGwj7AaUR+v+IIiIiIiIiIi92FROU+v+IERIiMzREVV92BDgG9wAD/4ZIAAAAAA8="
+  },
+  {
+   "name": "own phone to lid chat",
+   "error": 500,
+   "input": "APgMEwb6/4giIiIiIiIiL3aU+v+IERIiMzREVV92CPsBpRr/BRcAAAAEBDj4AfgGHVFFBE38AwECAw==",
+   "output": "APgPGwj7AaUR+v+IIiIiIiIiIi92FROo7KSU+v+IERIiMzREVV92BDgG9wAD/4ZIAAAAAA8="
+  },
+  {
+   "name": "own device peer message",
+   "error": null,
+   "input": "APgMEwb6/4ZIAAAAAA8DCPsBphr/BRcAAAAFBDiB7nj4AfgGHVFFBE38AwECAw==",
+   "output": "APgLGwj7AaYR+v+GSAAAAAAPAxUTBDgG9wAD/4ZIAAAAAA8="
+  },
+  {
+   "name": "own device peer message",
+   "error": 500,
+   "input": "APgMEwb6/4ZIAAAAAA8DCPsBphr/BRcAAAAFBDiB7nj4AfgGHVFFBE38AwECAw==",
+   "output": "APgNGwj7AaYR+v+GSAAAAAAPAxUTqOykBDgG9wAD/4ZIAAAAAA8="
+  },
+  {
+   "name": "status from contact",
+   "error": null,
+   "input": "APgMEwb6Cw0F+v+GSBEREREfAwj7Aaca/wUXAAAABgQ3+AH4Bh1RRQRN/AMBAgM=",
+   "output": "APgNGwj7AacR+gsNFRMF+v+GSBEREREfAwQ3BvcAA/+GSAAAAAAP"
+  },
+  {
+   "name": "status from contact",
+   "error": 500,
+   "input": "APgMEwb6Cw0F+v+GSBEREREfAwj7Aaca/wUXAAAABgQ3+AH4Bh1RRQRN/AMBAgM=",
+   "output": "APgPGwj7AacR+gsNFROo7KQF+v+GSBEREREfAwQ3BvcAA/+GSAAAAAAP"
+  },
+  {
+   "name": "own group message",
+   "error": null,
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfcBA/+IIiIiIiIiIi8I+wGoGv8FFwAAAAcEOPgB+AYdUUUETfwDAQID",
+   "output": "APgNGwj7AagR+v8JEgNjAAAAAAABHBUTBfcBA/+IIiIiIiIiIi8EOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "own group message",
+   "error": 500,
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfcBA/+IIiIiIiIiIi8I+wGoGv8FFwAAAAcEOPgB+AYdUUUETfwDAQID",
+   "output": "APgPGwj7AagR+v8JEgNjAAAAAAABHBUTqOykBfcBA/+IIiIiIiIiIi8EOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "newsletter",
+   "error": null,
+   "input": "APgMEwb6/wkSA2MAAAAAAAL8Cm5ld3NsZXR0ZXII+wGpGv8FFwAAAAgEOPwJc2VydmVyX2lk/wF3AA==",
+   "output": "APgLGwj7AakR+v8JEgNjAAAAAAAC/ApuZXdzbGV0dGVyFRMEOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "newsletter",
+   "error": 500,
+   "input": "APgMEwb6/wkSA2MAAAAAAAL8Cm5ld3NsZXR0ZXII+wGpGv8FFwAAAAgEOPwJc2VydmVyX2lk/wF3AA==",
+   "output": "APgNGwj7AakR+v8JEgNjAAAAAAAC/ApuZXdzbGV0dGVyFROo7KQEOAb3AAP/hkgAAAAADw=="
+  },
+  {
+   "name": "read receipt",
+   "error": null,
+   "input": "APgJBwb3AAL/hkgRERERHwj8AlIxBCoa/wUXAAAACQ==",
+   "output": "APgJGwj8AlIxEfcAAv+GSBEREREfFQcEKg=="
+  },
+  {
+   "name": "read receipt",
+   "error": 500,
+   "input": "APgJBwb3AAL/hkgRERERHwj8AlIxBCoa/wUXAAAACQ==",
+   "output": "APgLGwj8AlIxEfcAAv+GSBEREREfFQeo7KQEKg=="
+  },
+  {
+   "name": "group delivery receipt",
+   "error": null,
+   "input": "APgJBwb6/wkSA2MAAAAAAAEcBfcBBP+IERIiMzREVV8I/AJSMhr/BRcAAAAQ",
+   "output": "APgJGwj8AlIyEfr/CRIDYwAAAAAAARwVBwX3AQT/iBESIjM0RFVf"
+  },
+  {
+   "name": "group delivery receipt",
+   "error": 500,
+   "input": "APgJBwb6/wkSA2MAAAAAAAEcBfcBBP+IERIiMzREVV8I/AJSMhr/BRcAAAAQ",
+   "output": "APgLGwj8AlIyEfr/CRIDYwAAAAAAARwVB6jspAX3AQT/iBESIjM0RFVf"
+  },
+  {
+   "name": "encrypt notification",
+   "error": null,
+   "input": "APgJCQYDCPwCTjEEyxr/BRcAAAAR",
+   "output": "APgJGwj8Ak4xEQMVCQTL"
+  },
+  {
+   "name": "encrypt notification",
+   "error": 500,
+   "input": "APgJCQYDCPwCTjEEyxr/BRcAAAAR",
+   "output": "APgLGwj8Ak4xEQMVCajspATL"
+  },
+  {
+   "name": "call offer",
+   "error": null,
+   "input": "APgHZAb3AAL/hkgRERERHwj7AcEa/wUXAAAAEg==",
+   "output": "APgHGwj7AcER9wAC/4ZIERERER8VZA=="
+  },
+  {
+   "name": "call offer",
+   "error": 500,
+   "input": "APgHZAb3AAL/hkgRERERHwj7AcEa/wUXAAAAEg==",
+   "output": "APgJGwj7AcER9wAC/4ZIERERER8VZKjspA=="
+  }
+ ],
+ "decoded": [
+  {
+   "name": "pn contact device",
+   "input": "APgMEwb3AAL/hkgRERERHwj7AaEa/wUXAAAAAAQ4GPwDQm9i+AH4Bh1RRQRN/AMBAgM=",
+   "chat": "48111111111:2@s.whatsapp.net",
+   "fromMe": false,
+   "participant": null,
+   "author": "48111111111:2@s.whatsapp.net",
+   "category": null,
+   "wahaMessageId": "false_48111111111@c.us_A1",
+   "wahaAuthor": "48111111111@c.us"
+  },
+  {
+   "name": "pn contact, explicit device 0",
+   "input": "APgKEwb3AAD/hkgRERERHwj7AaAa/wUWmZmZmQQ4+AH4Bh1RRQRN/AMBAgM=",
+   "chat": "48111111111@s.whatsapp.net",
+   "fromMe": false,
+   "participant": null,
+   "author": "48111111111@s.whatsapp.net",
+   "category": null,
+   "wahaMessageId": "false_48111111111@c.us_A0",
+   "wahaAuthor": "48111111111@c.us"
+  },
+  {
+   "name": "lid contact",
+   "input": "APgKEwb6/4gREiIzNERVX3YI+wGiGv8FFwAAAAEEOPgB+AYdUUUETfwDAQID",
+   "chat": "111222333444555@lid",
+   "fromMe": false,
+   "participant": null,
+   "author": "111222333444555@lid",
+   "category": null,
+   "wahaMessageId": "false_111222333444555@lid_A2",
+   "wahaAuthor": "111222333444555@lid"
+  },
+  {
+   "name": "group from lid member",
+   "input": "APgOEwb6/wkSA2MAAAAAAAEcBfcBBP+IERIiMzREVV8I+wGjGv8FFwAAAAIEOPwPYWRkcmVzc2luZ19tb2RldvgB+AYdUUUETfwDAQID",
+   "chat": "120363000000000001@g.us",
+   "fromMe": false,
+   "participant": "111222333444555:4@lid",
+   "author": "111222333444555:4@lid",
+   "category": null,
+   "wahaMessageId": "false_120363000000000001@g.us_A3_111222333444555@lid",
+   "wahaAuthor": "111222333444555@lid"
+  },
+  {
+   "name": "own phone to pn chat",
+   "input": "APgMEwb6/4ZIAAAAAA8DlPr/hkgRERERHwMI+wGkGv8FFwAAAAMEOPgB+AYdUUUETfwDAQID",
+   "chat": "48111111111@s.whatsapp.net",
+   "fromMe": true,
+   "participant": null,
+   "author": "48000000000@s.whatsapp.net",
+   "category": null,
+   "wahaMessageId": "true_48111111111@c.us_A4",
+   "wahaAuthor": "48111111111@c.us"
+  },
+  {
+   "name": "own phone to lid chat",
+   "input": "APgMEwb6/4giIiIiIiIiL3aU+v+IERIiMzREVV92CPsBpRr/BRcAAAAEBDj4AfgGHVFFBE38AwECAw==",
+   "chat": "111222333444555@lid",
+   "fromMe": true,
+   "participant": null,
+   "author": "222222222222222@lid",
+   "category": null,
+   "wahaMessageId": "true_111222333444555@lid_A5",
+   "wahaAuthor": "111222333444555@lid"
+  },
+  {
+   "name": "own device peer message",
+   "input": "APgMEwb6/4ZIAAAAAA8DCPsBphr/BRcAAAAFBDiB7nj4AfgGHVFFBE38AwECAw==",
+   "chat": "48000000000@s.whatsapp.net",
+   "fromMe": true,
+   "participant": null,
+   "author": "48000000000@s.whatsapp.net",
+   "category": "peer",
+   "wahaMessageId": "true_48000000000@c.us_A6",
+   "wahaAuthor": "48000000000@c.us"
+  },
+  {
+   "name": "status from contact",
+   "input": "APgMEwb6Cw0F+v+GSBEREREfAwj7Aaca/wUXAAAABgQ3+AH4Bh1RRQRN/AMBAgM=",
+   "chat": "status@broadcast",
+   "fromMe": false,
+   "participant": "48111111111@s.whatsapp.net",
+   "author": "48111111111@s.whatsapp.net",
+   "category": null,
+   "wahaMessageId": "false_status@broadcast_A7_48111111111@c.us",
+   "wahaAuthor": "48111111111@c.us"
+  },
+  {
+   "name": "own group message",
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfcBA/+IIiIiIiIiIi8I+wGoGv8FFwAAAAcEOPgB+AYdUUUETfwDAQID",
+   "chat": "120363000000000001@g.us",
+   "fromMe": true,
+   "participant": "222222222222222:3@lid",
+   "author": "222222222222222:3@lid",
+   "category": null,
+   "wahaMessageId": "true_120363000000000001@g.us_A8_222222222222222@lid",
+   "wahaAuthor": "222222222222222@lid"
+  },
+  {
+   "name": "newsletter",
+   "input": "APgMEwb6/wkSA2MAAAAAAAL8Cm5ld3NsZXR0ZXII+wGpGv8FFwAAAAgEOPwJc2VydmVyX2lk/wF3AA==",
+   "chat": "120363000000000002@newsletter",
+   "fromMe": false,
+   "participant": null,
+   "author": "120363000000000002@newsletter",
+   "category": null,
+   "wahaMessageId": "false_120363000000000002@newsletter_A9",
+   "wahaAuthor": "120363000000000002@newsletter"
+  }
+ ],
+ "receipts": [
+  {
+   "name": "delivery, inactive",
+   "chat": "48111111111@s.whatsapp.net",
+   "participant": null,
+   "ids": [
+    "A1"
+   ],
+   "type": "inactive",
+   "output": "APgHBwj7AaER+v+GSBEREREfAwTG"
+  },
+  {
+   "name": "group delivery",
+   "chat": "120363000000000001@g.us",
+   "participant": "111222333444555:4@lid",
+   "ids": [
+    "A3"
+   ],
+   "type": "inactive",
+   "output": "APgJBwj7AaMR+v8JEgNjAAAAAAABHAX3AQT/iBESIjM0RFVfBMY="
+  },
+  {
+   "name": "sender, pn chat, no participant",
+   "chat": "48111111111@s.whatsapp.net",
+   "participant": null,
+   "ids": [
+    "A4"
+   ],
+   "type": "sender",
+   "output": "APgHBwj7AaSU+v+GSBEREREfAwTsJQ=="
+  },
+  {
+   "name": "sender, lid chat",
+   "chat": "111222333444555@lid",
+   "participant": "222222222222222@lid",
+   "ids": [
+    "A5"
+   ],
+   "type": "sender",
+   "output": "APgJBwj7AaWU+v+IERIiMzREVV92Efr/iCIiIiIiIiIvdgTsJQ=="
+  },
+  {
+   "name": "peer",
+   "chat": "48000000000@s.whatsapp.net",
+   "participant": null,
+   "ids": [
+    "A6"
+   ],
+   "type": "peer_msg",
+   "output": "APgHBwj7AaYR+v+GSAAAAAAPAwTtGw=="
+  },
+  {
+   "name": "several ids",
+   "chat": "48111111111@s.whatsapp.net",
+   "participant": null,
+   "ids": [
+    "B1",
+    "B2",
+    "B3"
+   ],
+   "type": "inactive",
+   "output": "APgIBwj7AbER+v+GSBEREREfAwTG+AH4AnH4AvgDPwj7AbL4Az8I+wGz"
+  },
+  {
+   "name": "history sync",
+   "chat": "48000000000@s.whatsapp.net",
+   "participant": null,
+   "ids": [
+    "B4"
+   ],
+   "type": "hist_sync",
+   "output": "APgHBwj7AbQR+v+GSAAAAAAPAwTtYw=="
+  }
+ ],
+ "targets": [
+  {
+   "name": "bob reacts in a DM to my message",
+   "kind": "reaction",
+   "input": "APgKEwb6/4gREiIzNERVX3YI/AVPVVRFUhr/BRcAAAEABDj4AfgGHVFFBE38AwECAw==",
+   "key": {
+    "remoteJid": "222222222222222@lid",
+    "fromMe": false,
+    "id": "T1"
+   },
+   "expected": "true_111222333444555@lid_T1"
+  },
+  {
+   "name": "bob reacts in a DM to his own message",
+   "kind": "reaction",
+   "input": "APgKEwb6/4gREiIzNERVX3YI/AVPVVRFUhr/BRcAAAEABDj4AfgGHVFFBE38AwECAw==",
+   "key": {
+    "remoteJid": "222222222222222@lid",
+    "fromMe": true,
+    "id": "T2"
+   },
+   "expected": "false_111222333444555@lid_T2"
+  },
+  {
+   "name": "carol reacts in a group to bob",
+   "kind": "reaction",
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfr/iDM0RFVWZnd/dgj8BU9VVEVSGv8FFwAAAQAEOPgB+AYdUUUETfwDAQID",
+   "key": {
+    "remoteJid": "120363000000000001@g.us",
+    "fromMe": false,
+    "id": "T3",
+    "participant": "111222333444555@lid"
+   },
+   "expected": "false_120363000000000001@g.us_T3_111222333444555@lid"
+  },
+  {
+   "name": "carol reacts in a group to me",
+   "kind": "reaction",
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfr/iDM0RFVWZnd/dgj8BU9VVEVSGv8FFwAAAQAEOPgB+AYdUUUETfwDAQID",
+   "key": {
+    "remoteJid": "120363000000000001@g.us",
+    "fromMe": false,
+    "id": "T4",
+    "participant": "222222222222222@lid"
+   },
+   "expected": "true_120363000000000001@g.us_T4_222222222222222@lid"
+  },
+  {
+   "name": "my phone reacts in a group to bob",
+   "kind": "reaction",
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfr/iCIiIiIiIiIvdgj8BU9VVEVSGv8FFwAAAQAEOPgB+AYdUUUETfwDAQID",
+   "key": {
+    "remoteJid": "120363000000000001@g.us",
+    "fromMe": false,
+    "id": "T5",
+    "participant": "111222333444555@lid"
+   },
+   "expected": "false_120363000000000001@g.us_T5_111222333444555@lid"
+  },
+  {
+   "name": "bob edits his message in a group",
+   "kind": "edit",
+   "input": "APgMEwb6/wkSA2MAAAAAAAEcBfr/iBESIjM0RFVfdgj8BU9VVEVSGv8FFwAAAQAEOPgB+AYdUUUETfwDAQID",
+   "key": {
+    "remoteJid": "120363000000000001@g.us",
+    "fromMe": true,
+    "id": "T6"
+   },
+   "expected": "false_120363000000000001@g.us_T6_111222333444555@lid"
+  }
+ ],
+ "preKeyUpload": {
+  "registrationId": 4321,
+  "identityPublic": "aGqNbqy++e6iRqyBEiwxy5ui81WlEmMK8hZMKruOuhg=",
+  "signedPreKey": {
+   "id": 7,
+   "public": "QcdmWFrrzuHOOgfMpIuUrViVhLOBuJ0otMuqITniHic=",
+   "private": "4NMe2wZinjQD36UCnHJAJZagoaNqmtqq/ySFarKWbWY=",
+   "signature": "9PTiXONPcVjK279PCgifsq8Qh/PVBt0ndGvAZUU+gg1u1S3xAQafNBOuRcx/+ZcfQitpxKcAi5fDwChKOaKRAw=="
+  },
+  "preKeys": {
+   "10": {
+    "public": "wmGhf72sRKq7gcWoMyotAl7nGmCwpiwfP4rkOa38gnA=",
+    "private": "UKQq+y7jnzHpBY5srqDY9+lICU7Ldnrv4KTgQezO9l4="
+   },
+   "11": {
+    "public": "jt+uWaXGmtf7Ur19b9tuGugNFHlLsnpWrCt2/lt3SF0=",
+    "private": "EK1NM//O0lWAOfPVOYDACj6DYHtBznJ4WAncpa0w3H0="
+   },
+   "12": {
+    "public": "9gYdMnvY1CZIZVwcM494Ca0lLJmPg5DNAohFi3+52RQ=",
+    "private": "OPVBZ9MKB6pTtRuHhK0C8bQdNk/2hCG6qAYxMx04fFs="
+   },
+   "13": {
+    "public": "1JQJgeMElKNzYw6dCEF7bgx6BnFTxHVz05lld1+/+Bw=",
+    "private": "ACTpfuh/r+wLlzkYRLQJSHO8QqqTrLvQs5zzECK49F4="
+   },
+   "14": {
+    "public": "nfzipGL1hN9IRX22bZPSTkTkXIbAILmojdMJGpwqUDA=",
+    "private": "wNCHaboJY7MEcWlIk/0ZLgr074VfYbgm6SIX9+jwH0A="
+   },
+   "15": {
+    "public": "1FQu5UddmI5szA/q2gf6u9IrlsRMe2ufezAIM/FPPVc=",
+    "private": "6PSrd/mPLdZQqT02B5HZr4ycuTWNjq9to8X3w2j1mWM="
+   },
+   "16": {
+    "public": "CORrobemIlCIXIqLpfcqARb8BGiCH3NVs4KKKNp311g=",
+    "private": "CGX8Fadp8gY8vV7QxQiXYSN8FLbRaPcP4YW8LtOqZW0="
+   },
+   "17": {
+    "public": "af/EaM4GRhObAEqN0dzg2U0TV0JHBzbGZ3W+oXl/7nA=",
+    "private": "sJFGnJXF17gF0zBIAPYWk9UlL9sAg0bCtnRaWBRnEUc="
+   },
+   "18": {
+    "public": "Q19HKfLIHF3LpKrq+6bV3uwp5F8gxdlnuMoYWrdw+0k=",
+    "private": "aAJqysaFhP+D06qLF2HkUXOFTcIg4TUbuhZkQUDW+kU="
+   },
+   "19": {
+    "public": "0p2oZHJiHCgqZ5imArj9hGEyOYtbPzNX/oau5kIixlQ=",
+    "private": "AITz/2xpYGoCN7cNo6+1knafU0uQUbj+HfULLrWaYXU="
+   }
+  },
+  "nextPreKeyId": 20,
+  "firstUnuploadedPreKeyId": 10,
+  "count": 5,
+  "output": "APgIGRbLBFoR+gAD+AX4Aq38BAAAEOH4AgT8AQX4Apz8IGhqjW6svvnuokasgRIsMcubovNVpRJjCvIWTCq7jroY+AJx+AX4Ap74AvgCCPwDAAAK+AJs/CDCYaF/vaxEqruBxagzKi0CXucaYLCmLB8/iuQ5rfyCcPgCnvgC+AII/AMAAAv4Amz8II7frlmlxprX+1K9fW/bbhroDRR5S7J6Vqwrdv5bd0hd+AKe+AL4Agj8AwAADPgCbPwg9gYdMnvY1CZIZVwcM494Ca0lLJmPg5DNAohFi3+52RT4Ap74AvgCCPwDAAAN+AJs/CDUlAmB4wSUo3NjDp0IQXtuDHoGcVPEdXPTmWV3X7/4HPgCnvgC+AII/AMAAA74Amz8IJ384qRi9YTfSEV9tm2T0k5E5FyGwCC5qI3TCRqcKlAw+ALsLfgD+AII/AMAAAf4Amz8IEHHZlha687hzjoHzKSLlK1YlYSzgbidKLTLqiE54h4n+ALU/ED09OJc409xWMrbv08KCJ+yrxCH89UG3Sd0a8BlRT6CDW7VLfEBBp80E65FzH/5lx9CK2nEpwCLl8PAKEo5opED",
+  "update": {
+   "nextPreKeyId": 20,
+   "firstUnuploadedPreKeyId": 15
+  }
+ }
+}

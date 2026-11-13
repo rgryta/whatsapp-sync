@@ -1,0 +1,49 @@
+[package]
+name = "whatsapp-client"
+description = "Our own WhatsApp device: adopts WAHA's Baileys session and decrypts what arrives"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+# Carries code from Signal's libsignal, which is AGPL-3.0-only, so this crate is too. The rest of the
+# workspace stays MIT: the MCP binary never depends on this crate.
+license = "AGPL-3.0-only"
+publish.workspace = true
+
+[dependencies]
+# The version-3 Signal protocol is vendored in `src/signal/` (libsignal v0.74.1, the last
+# release with X3DH); these are the primitives under it, kept current.
+aes = "0.9.2"
+aes-gcm = "0.11.1"
+base64 = "0.23.1"
+cbc = { version = "0.2.0", features = ["alloc"] }
+chrono.workspace = true
+curve25519-dalek = { version = "5.0.0", features = ["digest"] }
+# Pure Rust (miniz_oxide): the server may zlib-compress a frame.
+flate2 = "1.1.11"
+futures-util = { version = "0.3.34", default-features = false, features = ["sink"] }
+hkdf = "0.13.0"
+hmac = "0.13.0"
+prost = "0.14.6"
+rand = "0.10.3"
+# The CDN for voice notes and the whisper.cpp server. 0.12 with bundled roots and ring, as in
+# slack-sync: 0.13's rustls features need the system trust store.
+reqwest = { version = "0.12.28", default-features = false, features = ["rustls-tls-webpki-roots", "multipart", "json"] }
+serde.workspace = true
+serde_json.workspace = true
+sha2 = "0.11.0"
+sqlx.workspace = true
+subtle = "2.6.1"
+thiserror.workspace = true
+tokio = { workspace = true, features = ["time"] }
+# Bundled roots, not the system store: the same reason as slack-sync, an image needs no CA files.
+tracing.workspace = true
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+tokio-tungstenite = { version = "0.30.0", features = ["rustls-tls-webpki-roots"] }
+whatsapp-core.workspace = true
+x25519-dalek = { version = "3.0.0", features = ["static_secrets"] }
+
+[dev-dependencies]
+axum = "0.8.9"
+# The archive tests' throwaway Postgres; see tests/store.rs. Same versions as the root package.
+testcontainers-modules = { version = "0.15.0", features = ["postgres"] }
+testcontainers = { version = "0.27.3", features = ["reusable-containers"] }
