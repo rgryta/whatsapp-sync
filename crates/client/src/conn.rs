@@ -19,6 +19,7 @@ use crate::baileys::Device;
 use crate::binary::{self, BinaryError, Node};
 use crate::login::{self, LoginSettings};
 use crate::noise::{self, Frames, Handshake, NoiseError, Transport};
+use crate::signal::curve::KeyPair;
 
 #[derive(Debug, thiserror::Error)]
 pub enum ConnError {
@@ -34,6 +35,8 @@ pub enum ConnError {
     BadAccountId(String),
     #[error("connection closed during the handshake")]
     ClosedEarly,
+    #[error("a header value is not valid: {0}")]
+    Header(#[from] tokio_tungstenite::tungstenite::http::header::InvalidHeaderValue),
 }
 
 pub struct Connection {
@@ -41,6 +44,14 @@ pub struct Connection {
     frames: Frames,
     transport: Transport,
     tags: Tags,
+}
+
+/// Where a server speaking this protocol listens. WhatsApp's is [`noise::URL`]; Messenger's
+/// encrypted chat speaks the same protocol from its own host.
+pub struct Endpoint<'a> {
+    pub url: &'a str,
+    pub origin: &'a str,
+    pub user_agent: Option<&'a str>,
 }
 
 /// Connects and logs in as `device`. Returns the connection and the server's first node, which
@@ -58,24 +69,48 @@ pub async fn connect(
         Some(info) => format!("{}?ED={}", noise::URL, URL_SAFE_NO_PAD.encode(info)),
         None => noise::URL.to_owned(),
     };
-    let mut request = url.into_client_request()?;
-    request
-        .headers_mut()
-        .insert("Origin", HeaderValue::from_static(noise::ORIGIN));
+    let endpoint = Endpoint {
+        url: &url,
+        origin: noise::ORIGIN,
+        user_agent: None,
+    };
+    let payload = login::client_payload(user, device_number, settings);
+    connect_to(
+        &endpoint,
+        device.routing_info.as_deref(),
+        &device.noise,
+        &payload,
+    )
+    .await
+}
+
+/// Connects to `endpoint` and logs in with `payload`, an encoded `ClientPayload`, as the device
+/// whose Noise key is `noise_key`.
+pub async fn connect_to(
+    endpoint: &Endpoint<'_>,
+    routing_info: Option<&[u8]>,
+    noise_key: &KeyPair,
+    payload: &[u8],
+) -> Result<(Connection, Node), ConnError> {
+    let mut request = endpoint.url.into_client_request()?;
+    let headers = request.headers_mut();
+    headers.insert("Origin", HeaderValue::from_str(endpoint.origin)?);
+    if let Some(user_agent) = endpoint.user_agent {
+        headers.insert("User-Agent", HeaderValue::from_str(user_agent)?);
+    }
     let (mut ws, _) = tokio_tungstenite::connect_async(request).await?;
 
-    let mut frames = Frames::new(device.routing_info.as_deref());
+    let mut frames = Frames::new(routing_info);
     let handshake = Handshake::new();
     ws.send(Message::Binary(Bytes::from(
         frames.encode(&handshake.client_hello())?,
     )))
     .await?;
     let server_hello = next_frame(&mut ws, &mut frames).await?;
-    let payload = login::client_payload(user, device_number, settings);
     let (finish, mut transport) = handshake.client_finish(
         &server_hello,
-        &device.noise,
-        &payload,
+        noise_key,
+        payload,
         &noise::WA_CERT_ROOT,
         unix_now(),
     )?;
