@@ -59,14 +59,14 @@ and pushed to the local registry. `ci.yml` runs the gates on every pull request.
 
 ## Invariants worth not breaking
 
-- **Two processes, unequal rights.** `whatsapp-client` owns the schema and is the only
+- **Two processes, unequal rights.** `whatsapp-ingest` owns the schema and is the only
   thing that applies migrations or writes messages. `whatsapp-mcp` reads, asserts the
   migrations it was built against, and refuses to start on drift. That is a missing
   dependency edge: the root package and `crates/{core,mcp}` must not depend on
   `whatsapp-client`, so the code that can reach WhatsApp is not in the MCP process at all.
   All SQL lives in `crates/core/src/store/`, and `tests/archive/isolation.rs` keeps both
   facts honest.
-- **WAHA and `whatsapp-client` are the same WhatsApp device.** Never run both.
+- **WAHA and `whatsapp-ingest` are the same WhatsApp device.** Never run both.
 - **Migrations are forward-only** and applied in filename order. Never edit an
   applied migration; add another.
 - **The device's keys live in schema `device`, never `public`.** `crates/client` keeps the

@@ -36,7 +36,7 @@ jobs:
       - run: cargo test --workspace
       # The same invocation `deploy/Dockerfile` uses, word for word, so the two cannot
       # drift. They did once: CI built everything with a plain `cargo build --release`
-      # and passed, while the Dockerfile's filtered `--bin whatsapp-mcp --bin whatsapp-client`
+      # and passed, while the Dockerfile's filtered `--bin whatsapp-mcp --bin whatsapp-ingest`
       # could not resolve the second binary at all, because `--bin` searches only the
       # default-run package. A green CI run said nothing about the image.
       #
