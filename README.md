@@ -2,7 +2,7 @@
 
 A permanent WhatsApp archive in PostgreSQL, and a read-only MCP server over it.
 
-`whatsapp-client` is a receive-only WhatsApp linked device written from scratch in Rust: it
+`whatsapp-ingest` is a receive-only WhatsApp linked device written from scratch in Rust: it
 holds the Noise transport, the Signal sessions and the group sender keys itself, decrypts
 what arrives, writes it to Postgres, and acknowledges it only once it is stored.
 `whatsapp-mcp` serves that archive to an MCP client. Both binaries ship in one image of
@@ -15,7 +15,7 @@ first start (`WHATSAPP_IMPORT_FROM`), so moving off WAHA needs no re-pairing.
 
 | binary | role | database role |
 |---|---|---|
-| `whatsapp-client` | the linked device: decrypts, archives, acks, transcribes voice notes | `whatsapp_ingest` (DDL + writes) |
+| `whatsapp-ingest` | the linked device: decrypts, archives, acks, transcribes voice notes | `whatsapp_ingest` (DDL + writes) |
 | `whatsapp-mcp` | serves the archive over MCP | `whatsapp_mcp` (read-only except aliases) |
 
 - **The client is the only writer.** It applies the migrations; the MCP asserts the schema
@@ -61,7 +61,7 @@ The image is published to `ghcr.io/rgryta/whatsapp-sync` on every version bump
    ```
 
 2. Put the secrets in `.env` beside the compose file (see `.env.example`).
-3. Moving off WAHA: stop WAHA first — **WAHA and `whatsapp-client` are the same device and
+3. Moving off WAHA: stop WAHA first — **WAHA and `whatsapp-ingest` are the same device and
    must never run at once** — keep a copy of its session folder, then start the client with
    that folder mounted read-only as `WHATSAPP_IMPORT_FROM`. Its log says `adopted the device`
    and `logged in`. The setting is ignored once a device is stored.

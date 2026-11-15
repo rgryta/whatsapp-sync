@@ -1,4 +1,4 @@
-# One workspace, two binaries: `whatsapp-client` (the WhatsApp linked device and ingester,
+# One workspace, two binaries: `whatsapp-ingest` (the WhatsApp linked device and ingester,
 # AGPL) and `whatsapp-mcp` (the read surface, MIT, in this root package). The root package
 # never depends on `whatsapp-client`, so the process that serves the archive cannot reach
 # WhatsApp: the code is not in it. `tests/archive/isolation.rs` keeps the manifests honest.
@@ -8,7 +8,7 @@ resolver = "3"
 
 [workspace.package]
 # The release version: bumping it on main tags it and publishes the image (tag.yml).
-version = "0.3.1"
+version = "0.3.2"
 edition = "2024"
 # The toolchain the image builds with, which is always the latest stable. Cargo resolves
 # dependencies to what this claims, so an older number holds back releases (it held back the

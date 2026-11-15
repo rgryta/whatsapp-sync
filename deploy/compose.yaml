@@ -3,19 +3,19 @@
 # decide when it moves. Secrets go in `.env` beside it (see `.env.example`); roles and
 # grants are in `deploy/provision-whatsapp-db.sql`.
 #
-# `whatsapp-client` adopts an existing WAHA (Baileys) session on its first start, so no
-# re-pairing. WAHA and `whatsapp-client` are then the same WhatsApp device: never run both.
+# `whatsapp-ingest` adopts an existing WAHA (Baileys) session on its first start, so no
+# re-pairing. WAHA and `whatsapp-ingest` are then the same WhatsApp device: never run both.
 
 services:
-  whatsapp-client:
+  whatsapp-ingest:
     labels:
       - traefik.enable=false
       - wud.watch=true
       - wud.watch.digest=true
     image: ghcr.io/rgryta/whatsapp-sync:latest
-    container_name: whatsapp-client
+    container_name: whatsapp-ingest
     # The image's default command is the MCP server.
-    command: ["whatsapp-client"]
+    command: ["whatsapp-ingest"]
     restart: unless-stopped
     # Already unprivileged; this stops the process gaining anything either, and nothing in
     # here needs a capability.

@@ -19,7 +19,7 @@ COPY src/ ./src/
 COPY db-migrations/ ./db-migrations/
 # `tests/` is excluded by .dockerignore and not needed: `--bins` does not build it.
 # `--workspace --bins`, the same line `.github/workflows/ci.yml` runs: `--bin` resolves only
-# inside the default-run package, so naming `whatsapp-client` that way fails.
+# inside the default-run package, so naming `whatsapp-ingest` that way fails.
 RUN cargo build --release --workspace --bins --target x86_64-unknown-linux-musl
 
 # Nothing but the binaries. No libc, no shell, no certificate store, and each absence is
@@ -34,7 +34,7 @@ RUN cargo build --release --workspace --bins --target x86_64-unknown-linux-musl
 FROM scratch
 # Root-owned and merely executable, so neither service can rewrite its own binary.
 COPY --from=rust /build/target/x86_64-unknown-linux-musl/release/whatsapp-mcp /usr/local/bin/whatsapp-mcp
-COPY --from=rust /build/target/x86_64-unknown-linux-musl/release/whatsapp-client /usr/local/bin/whatsapp-client
+COPY --from=rust /build/target/x86_64-unknown-linux-musl/release/whatsapp-ingest /usr/local/bin/whatsapp-ingest
 # Numeric: there is no /etc/passwd here. 65532 is distroless' `nonroot`.
 USER 65532:65532
 EXPOSE 8000
@@ -43,5 +43,5 @@ EXPOSE 8000
 # GIT_SHA LAST, on purpose: above the COPYs it would enter their layer cache key.
 ARG GIT_SHA=unknown
 ENV WHATSAPP_GIT_SHA=$GIT_SHA
-# The client service overrides this with `whatsapp-client`.
+# The ingest service overrides this with `whatsapp-ingest`.
 CMD ["whatsapp-mcp"]
