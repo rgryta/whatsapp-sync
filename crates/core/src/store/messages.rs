@@ -167,7 +167,7 @@ pub async fn search_messages(
     ))
     .bind(query)
     .bind(chat_id)
-    .bind(person)
+    .bind(person.map(super::fold))
     .bind(before)
     .bind(after)
     .bind(limit)

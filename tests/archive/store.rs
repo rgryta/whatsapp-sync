@@ -372,6 +372,91 @@ db_test!(a_person_with_no_direct_chat_has_no_chat_id, |f| {
     assert_eq!(rows[0].chat_id, None);
 });
 
+// Polish names get typed without their diacritics, by people and agents alike, so a
+// name matches with or without them, in either direction and in any case. Every name and
+// number here is invented.
+const MICHAL_ACCENT: &str = "48500000101@c.us";
+const MICHAL_PLAIN: &str = "48500000102@c.us";
+const LUKASZ: &str = "48500000103@c.us";
+
+async fn polish_people(pool: &sqlx::PgPool) {
+    for (id, phone, contact) in [
+        (MICHAL_ACCENT, "48500000101", "Michał Brzozowy"),
+        (MICHAL_PLAIN, "48500000102", "Michal Jaworny"),
+        (LUKASZ, "48500000103", "Łukasz Grabowy"),
+    ] {
+        support::participant(
+            pool,
+            support::Participant {
+                participant_id: id,
+                lid: None,
+                phone: Some(phone),
+                contact_name: Some(contact),
+                push_name: None,
+            },
+        )
+        .await;
+    }
+}
+
+async fn people_ids(pool: &sqlx::PgPool, fragment: &str) -> Vec<String> {
+    let mut ids: Vec<String> = store::find_people(pool, fragment, 20)
+        .await
+        .expect("people")
+        .into_iter()
+        .map(|row| row.participant_id)
+        .collect();
+    ids.sort();
+    ids
+}
+
+db_test!(people_match_with_or_without_diacritics, |f| {
+    polish_people(&f.pool).await;
+    for fragment in ["Michal", "michał", "MICHAŁ"] {
+        assert_eq!(
+            people_ids(&f.pool, fragment).await,
+            [MICHAL_ACCENT, MICHAL_PLAIN],
+            "{fragment}"
+        );
+    }
+    for fragment in ["ŁUKASZ", "lukasz", "Łukasz"] {
+        assert_eq!(people_ids(&f.pool, fragment).await, [LUKASZ], "{fragment}");
+    }
+    assert_eq!(
+        people_ids(&f.pool, "Michał Brzozowy").await,
+        [MICHAL_ACCENT]
+    );
+    assert_eq!(people_ids(&f.pool, "Michal Jaworny").await, [MICHAL_PLAIN]);
+});
+
+db_test!(an_alias_matches_without_diacritics, |f| {
+    polish_people(&f.pool).await;
+    alias(&f.pool, "Żółw", &[MICHAL_PLAIN]).await;
+    assert_eq!(people_ids(&f.pool, "zolw").await, [MICHAL_PLAIN]);
+});
+
+db_test!(a_person_filter_matches_without_diacritics, |f| {
+    polish_people(&f.pool).await;
+    alias(&f.pool, "Łoś", &[LUKASZ]).await;
+    support::chat(&f.pool, GROUP, "group", Some("Book club regulars")).await;
+    support::message(
+        &f.pool,
+        Msg {
+            message_id: "p1",
+            author_id: Some(LUKASZ),
+            body: Some("pierogi tonight"),
+            ..Msg::default()
+        },
+    )
+    .await;
+    for person in ["lukasz", "ŁUKASZ", "Łukasz", "los"] {
+        let hits = store::search_messages(&f.pool, "pierogi", Some(person), None, None, None, 10)
+            .await
+            .expect("search");
+        assert_eq!(hit_ids(&hits), ["p1"], "{person}");
+    }
+});
+
 // ----------------------------------------------------------------------------- search
 
 db_test!(search_finds_a_word_and_snippets_it, |f| {
