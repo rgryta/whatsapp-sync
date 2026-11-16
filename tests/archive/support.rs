@@ -115,7 +115,7 @@ pub fn at(second: i64) -> DateTime<Utc> {
     base() + TimeDelta::seconds(second)
 }
 
-pub const GROUP: &str = "120363421509452248@g.us";
+pub const GROUP: &str = "120363000000000042@g.us";
 pub const DM: &str = "447700900123@c.us";
 pub const HETTY: &str = "447700900123@c.us";
 pub const HETTY_LID: &str = "269@lid";

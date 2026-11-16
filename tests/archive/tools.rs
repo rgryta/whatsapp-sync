@@ -21,7 +21,7 @@ db_test!(chats_lists_newest_activity_first_with_counts, |f| {
          Henrietta Adaeze Okonkwo  (dm, 1 messages, last 2026-08-01T12:00+00:00)  \
          [id 447700900123@c.us]\n\
          Book club regulars  (group, 2 messages, last 2026-08-01T12:00+00:00)  \
-         [id 120363421509452248@g.us]"
+         [id 120363000000000042@g.us]"
     );
 });
 
@@ -285,7 +285,7 @@ db_test!(
         let out = tools::revisions(&f.pool, GROUP, "nope")
             .await
             .expect("revisions");
-        assert_eq!(out, "no message nope in chat 120363421509452248@g.us");
+        assert_eq!(out, "no message nope in chat 120363000000000042@g.us");
     }
 );
 
@@ -298,7 +298,7 @@ db_test!(search_renders_the_chat_the_author_and_a_snippet, |f| {
         out,
         "1 match(es) for 'pierogi'\n\
          2026-08-01T12:00+00:00  Book club regulars  Henrietta Adaeze Okonkwo: \
-         <b>pierogi</b> tonight   [chat 120363421509452248@g.us id g1]"
+         <b>pierogi</b> tonight   [chat 120363000000000042@g.us id g1]"
     );
 });
 
