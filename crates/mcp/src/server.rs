@@ -205,7 +205,8 @@ impl WhatsAppMcp {
     #[tool(
         name = "search",
         description = "Full-text search across message bodies and voice-note transcripts, best \
-                       match first. `person` narrows by sender and matches an alias, \
+                       match first. Ignores accents and forgives a typo or a different word \
+                       ending; a \"quoted phrase\" or -word stays exact. `person` narrows by sender and matches an alias, \
                        address-book name, pushname or phone number. `after`/`before` (ISO 8601 \
                        or a Unix epoch) narrow it to a period, which is what to use when the \
                        question is about a particular month rather than about all time. Deleted \
