@@ -467,6 +467,37 @@ db_test!(search_finds_a_word_and_snippets_it, |f| {
     assert_eq!(hits[0].chat_name, "Book club regulars");
 });
 
+db_test!(search_forgives_accents_typos_and_endings, |f| {
+    seed(&f.pool).await;
+    support::said(&f.pool, DM, "s1", 10, "naprawa samochodu jutro").await;
+    support::said(&f.pool, DM, "s2", 11, "samochód stoi").await;
+    support::said(&f.pool, DM, "z1", 12, "Widziałem żółwia w zoo").await;
+    message(
+        &f.pool,
+        Msg {
+            chat_id: DM,
+            message_id: "v1",
+            second: 13,
+            body: None,
+            kind: "ptt",
+            transcript: Some("kupię faktury jutro"),
+            transcript_state: "done",
+            ..Msg::default()
+        },
+    )
+    .await;
+    // Accents fold both ways, and an exact word outranks a near one.
+    assert_eq!(hit_ids(&search(&f.pool, "samochod").await), ["s2", "s1"]);
+    assert_eq!(hit_ids(&search(&f.pool, "zolw").await), ["z1"]);
+    // A typo, words far apart in either order, and a voice note's transcript.
+    assert_eq!(hit_ids(&search(&f.pool, "pierogki").await), ["g1"]);
+    assert_eq!(hit_ids(&search(&f.pool, "jutro samochod").await), ["s1"]);
+    assert_eq!(hit_ids(&search(&f.pool, "faktura").await), ["v1"]);
+    // Same letters, different word: no match. A quoted phrase stays exact.
+    assert!(search(&f.pool, "kot").await.is_empty());
+    assert!(search(&f.pool, "\"pierogki\"").await.is_empty());
+});
+
 db_test!(search_can_be_narrowed_to_a_person, |f| {
     seed(&f.pool).await;
     alias(&f.pool, "Hetty", &[HETTY]).await;
