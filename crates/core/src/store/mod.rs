@@ -132,19 +132,72 @@ macro_rules! message_columns {
     };
 }
 
-/// Matches a person by any name form they are known under.
+/// The accent fold, one-to-one and lowercase: Polish first, then the other Latin
+/// diacritics. A macro so the SQL below can `concat!` it; [`FOLD_FROM`] and [`FOLD_TO`]
+/// are the same text for [`fold`], so the two sides cannot drift apart.
+macro_rules! fold_from {
+    () => {
+        "ąćęłńóśźżáàâäãåéèêëěíìîïòôöõőúùûüůűýÿñňçčšžřďť"
+    };
+}
+macro_rules! fold_to {
+    () => {
+        "acelnoszzaaaaaaeeeeeiiiiooooouuuuuuyynnccszrdt"
+    };
+}
+
+pub(crate) const FOLD_FROM: &str = fold_from!();
+pub(crate) const FOLD_TO: &str = fold_to!();
+
+/// A column folded the way [`fold`] folds the caller's input: `lower()` first, so an
+/// uppercase letter (Ł included) reaches the table as the lowercase one it lists.
+macro_rules! folded {
+    ($col:literal) => {
+        concat!(
+            "translate(lower(",
+            $col,
+            "), '",
+            fold_from!(),
+            "', '",
+            fold_to!(),
+            "')"
+        )
+    };
+}
+
+/// The caller's side of [`folded!`]: lowercase, then the same one-to-one mapping, so
+/// "Michal", "michał" and "MICHAŁ" all compare equal to a stored "Michał".
+pub(crate) fn fold(text: &str) -> String {
+    text.to_lowercase()
+        .chars()
+        .map(|c| {
+            FOLD_FROM
+                .chars()
+                .zip(FOLD_TO.chars())
+                .find(|&(from, _)| from == c)
+                .map_or(c, |(_, to)| to)
+        })
+        .collect()
+}
+
+/// Matches a person by any name form they are known under, ignoring case and accents.
 ///
-/// The parameter number is a literal because the fragment is used at `$1` in
-/// `find_people` and at `$3` in `search_messages`; the Python does the same thing with
-/// `.replace("$PARAM", "$1")`.
+/// The parameter must already be [`fold`]ed. The parameter number is a literal because
+/// the fragment is used at `$1` in `find_people` and at `$3` in `search_messages`; the
+/// Python does the same thing with `.replace("$PARAM", "$1")`. Folding the column
+/// costs any name index, which is fine: the people tables are small.
 macro_rules! person_match {
     ($param:literal) => {
         concat!(
             "
-  (p.contact_name ILIKE '%' || ",
+  (",
+            folded!("p.contact_name"),
+            " LIKE '%' || ",
             $param,
             " || '%'
-    OR p.push_name ILIKE '%' || ",
+    OR ",
+            folded!("p.push_name"),
+            " LIKE '%' || ",
             $param,
             " || '%'
     OR p.phone     ILIKE '%' || ",
@@ -152,7 +205,9 @@ macro_rules! person_match {
             " || '%'
     OR EXISTS (SELECT 1 FROM alias_member am
                 WHERE am.participant_id = p.participant_id
-                  AND am.alias ILIKE '%' || ",
+                  AND ",
+            folded!("am.alias"),
+            " LIKE '%' || ",
             $param,
             " || '%'))
 "
@@ -172,3 +227,26 @@ pub use chats::list_chats;
 pub use messages::{count_history, get_history, get_message, list_revisions, search_messages};
 pub use people::find_people;
 pub use status::sync_status;
+
+#[cfg(test)]
+mod tests {
+    use super::{FOLD_FROM, FOLD_TO, fold};
+
+    #[test]
+    fn the_rust_fold_and_the_sql_table_agree() {
+        assert_eq!(FOLD_FROM.chars().count(), FOLD_TO.chars().count());
+        assert!(FOLD_TO.chars().all(|c| c.is_ascii_lowercase()));
+        let sql = folded!("x");
+        assert!(sql.contains(FOLD_FROM) && sql.contains(FOLD_TO), "{sql}");
+        for (from, to) in FOLD_FROM.chars().zip(FOLD_TO.chars()) {
+            assert_eq!(FOLD_FROM.matches(from).count(), 1, "{from} listed twice");
+            assert_eq!(fold(&from.to_string()), to.to_string(), "{from}");
+            assert_eq!(
+                fold(&from.to_uppercase().to_string()),
+                to.to_string(),
+                "{from}"
+            );
+        }
+        assert_eq!(fold("ŁUKASZ Michał"), "lukasz michal");
+    }
+}
