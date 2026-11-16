@@ -32,7 +32,7 @@ pub async fn find_people(
         LIMIT $2
         "
     ))
-    .bind(fragment)
+    .bind(super::fold(fragment))
     .bind(limit)
     .fetch_all(pool)
     .await
