@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+.claude/
+
+# Rust build output
+/target/
